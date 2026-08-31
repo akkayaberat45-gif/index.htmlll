@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beyza'nın Doğum Günü 🎂</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;overflow-x:hidden;font-family:Arial,sans-serif;color:#fff7fa;background:radial-gradient(circle at 50% -10%,#9d3154,#570d2b 45%,#200611);display:flex;justify-content:center;align-items:center;padding:25px}
+.card{width:min(94%,600px);padding:34px 25px;text-align:center;border:1px solid #ffd5e455;border-radius:30px;background:#35091bd9;backdrop-filter:blur(14px);box-shadow:0 25px 90px #0008;position:relative;z-index:2}
+.cake{font-size:78px;animation:bob 2s infinite ease-in-out}h1{font-size:clamp(38px,9vw,65px);margin:5px 0;color:#ffe4ec}h2{color:#ffc5d5}p{font-size:18px;line-height:1.55}
+button{border:0;border-radius:999px;padding:14px 25px;margin:7px;background:#ffe4ec;color:#520d2b;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 8px 25px #0005;transition:.2s}button:hover{transform:scale(1.07)}
+#surprise,#quiz,#wish,#photos{display:none;margin-top:18px;animation:pop .5s}.box{padding:18px;border-radius:20px;background:#6b1436aa;margin-top:12px}
+.choice{display:block;width:90%;margin:9px auto}.correct{background:#b9ffd0!important}.wrong{background:#ffc0c0!important}
+#count{font-size:22px;font-weight:bold;color:#ffe0e8}.float{position:fixed;bottom:-60px;font-size:30px;animation:up 5s linear forwards;z-index:1;pointer-events:none}
+.conf{position:fixed;top:-20px;width:9px;height:15px;animation:fall 3.5s linear forwards;z-index:5}
+@keyframes bob{50%{transform:translateY(-10px)}}@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}@keyframes up{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+input{padding:13px;border-radius:12px;border:0;width:80%;font-size:16px}
+.small{font-size:13px;color:#e7afc1}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="cake">🎂</div>
+  <h1>İYİ Kİ DOĞDUN!</h1>
+  <h2>🎀 BEYZA 🎀</h2>
+  <p>Bugün sıradan bir gün değil...<br><b>BEYZA GÜNÜ™</b> ilan edilmiştir. 🍷</p>
+
+  <div id="count">Sürpriz hazırlanıyor... 🎁</div>
+  <button onclick="surprise()">🎁 Sürprizi Patlat</button>
+  <button onclick="party()">🪩 Parti Modu</button>
+  <button onclick="quiz()">🧠 Beyza Testi</button>
+  <button onclick="wish()">✨ Dilek Makinesi</button>
+
+  <div id="surprise" class="box">
+    <div style="font-size:70px">🥳🎉🎈</div>
+    <h2>DOĞUM GÜNÜ BOSSU BEYZA!</h2>
+    <p>Yeni yaşında bol kahkaha, güzel anılar ve istediğin her şeyin gerçekleşmesi dileğiyle. ❤️</p>
+    <button onclick="cake()">🍰 Pastayı Kes</button>
+    <div id="cakeResult"></div>
+  </div>
+
+  <div id="quiz" class="box">
+    <h2>🧠 Mini Beyza Testi</h2>
+    <p>Bugünün başrolü kim?</p>
+    <button class="choice" onclick="answer(this,true)">BEYZA 👑</button>
+    <button class="choice" onclick="answer(this,false)">Mahallenin kedisi 🐈</button>
+    <button class="choice" onclick="answer(this,false)">Minecraft villager'ı 🧑‍🌾</button>
+    <div id="quizResult"></div>
+  </div>
+
+  <div id="wish" class="box">
+    <h2>✨ Dilek Makinesi</h2>
+    <p>Bir dilek yaz, makine onu evrene postalasın. 🚀</p>
+    <input id="wishText" placeholder="Beyza'nın dileği...">
+    <br><button onclick="sendWish()">🚀 Gönder</button>
+    <div id="wishResult"></div>
+  </div>
+
+  <p class="small">🍷 Bordo tema + bolca doğum günü enerjisi 🍷</p>
+</div>
+
+<script>
+function surprise(){document.getElementById('surprise').style.display='block';confetti(80)}
+function party(){document.body.style.animation='pulse .5s infinite';for(let i=0;i<18;i++)setTimeout(()=>floaty(['🎈','🎉','❤️','🍷','✨','🥳'][Math.floor(Math.random()*6)]),i*100);confetti(120)}
+function quiz(){document.getElementById('quiz').style.display='block'}
+function wish(){document.getElementById('wish').style.display='block'}
+function answer(el,ok){el.classList.add(ok?'correct':'wrong');document.getElementById('quizResult').innerHTML=ok?'<h2>🎯 DOĞRU! Beyza +1 yaş aldı.</h2>':'<p>❌ Yanlış cevap. Kediyi sonra kutlarız. 😭</p>'}
+function cake(){document.getElementById('cakeResult').innerHTML='<h2>🔪🍰 PASTA KESİLDİ!</h2><p>Herkese bir dilim! (Ama büyük dilim Beyza’nın 😎)</p>';confetti(100)}
+function sendWish(){let x=document.getElementById('wishText').value.trim();document.getElementById('wishResult').innerHTML=x?'<h2>🚀 Dilek uzaya gönderildi!</h2><p>Evrenin “okundu” bilgisi bekleniyor... 🌌</p>':'<p>Önce bir dilek yaz 😭</p>'}
+function floaty(x){let e=document.createElement('div');e.className='float';e.textContent=x;e.style.left=Math.random()*100+'vw';document.body.appendChild(e);setTimeout(()=>e.remove(),5200)}
+function confetti(n){for(let i=0;i<n;i++){let e=document.createElement('div');e.className='conf';e.style.left=Math.random()*100+'vw';e.style.background=['#fff','#ffd1df','#e28aa6','#8f2448','#f5b7c8'][Math.floor(Math.random()*5)];e.style.animationDelay=Math.random()*.7+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4500)}}
+let target=new Date();target.setSeconds(target.getSeconds()+5);
+let t=setInterval(()=>{let d=target-new Date();if(d<=0){document.getElementById('count').textContent='🎉 SÜRPRİZ HAZIR! 🎉';clearInterval(t)}else document.getElementById('count').textContent='⏳ '+Math.ceil(d/1000)+' saniye...'},100);
+</script>
+</body>
+</html>
